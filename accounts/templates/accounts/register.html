@@ -1,33 +1,58 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Parent Register</title>
-    <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <div class="background-image"></div>
-    <div class="container">
-        <h2>Create an Account</h2>
-        <form method="POST" class="form">
-            {% csrf_token %}
-            {% for field in form %}
-                <div class="form-group">
-                    <label>{{ field.label_tag }}</label>
-                    {{ field }}
-                    {% if field.help_text %}
-                        <small class="help-text">{{ field.help_text }}</small>
-                    {% endif %}
-                    {% for error in field.errors %}
-                        <p class="error">{{ error }}</p>
-                    {% endfor %}
-                </div>
-            {% endfor %}
-            <button type="submit">Register</button>
+
+{% block title %}Register - KINDERNEST{% endblock %}
+
+{% block content %}
+  <main class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-image">
+        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba" alt="Happy children">
+      </div>
+      <div class="auth-content">
+        <h2 class="auth-heading">Create Parent Account</h2>
+        <form method="POST" class="auth-form">
+          {% csrf_token %}
+          
+          <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">Username</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+              <div class="error-message">{{ form.username.errors }}</div>
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">Email</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+              <div class="error-message">{{ form.email.errors }}</div>
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.password1.id_for_label }}">Password</label>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+              <div class="error-message">{{ form.password1.errors }}</div>
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+              <div class="error-message">{{ form.password2.errors }}</div>
+            {% endif %}
+          </div>
+
+          <button type="submit" class="auth-button">Register Now</button>
         </form>
-        <script src="{% static 'accounts/js/main.js' %}"></script>
+        
+        <div class="auth-links">
+          <p>Already have an account? <a href="{% url 'login' %}" class="auth-link">Login here</a></p>
+        </div>
+      </div>
     </div>
-</body>
-</html>
+  </main>
+{% endblock %}

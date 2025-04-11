@@ -55,7 +55,7 @@ ROOT_URLCONF = 'daycare_system.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,3 +128,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.Parent'
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+LOGIN_REDIRECT_URL = 'index'  # After successful login
+LOGOUT_REDIRECT_URL = 'login'  # After logout
+LOGIN_URL = 'login'  # Where to redirect for login required
