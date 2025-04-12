@@ -7,6 +7,8 @@
     <title>{% block title %}KINDERNEST{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+
 </head>
 <body>
     <header class="main-header">
@@ -19,8 +21,13 @@
                 <li><a href="#locations">Locations ▼</a></li>
                 <li><a href="#programs">Programs ▼</a></li>
                 <li><a href="#about">About ▼</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="cta-button">Logout</button>
+                    </form>
                 {% else %}
                     <li><a href="{% url 'login' %}">Login</a></li>
                     <li><a href="{% url 'register' %}">Register</a></li>

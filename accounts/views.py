@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from .forms import ParentRegisterForm
+from .forms import ParentUpdateForm
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
@@ -25,3 +27,22 @@ class CustomLoginView(LoginView):
     
 def home(request):
     return render(request, 'index.html')
+
+@login_required
+def profile(request):
+    parent = request.user
+    return render(request, 'accounts/profile.html', {'parent': parent})
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        form = ParentUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile updated successfully!")
+            return redirect('profile')
+        else:
+            print(form.errors)  # For debugging
+    else:
+        form = ParentUpdateForm(instance=request.user)
+    return render(request, 'accounts/edit_profile.html', {'form': form})

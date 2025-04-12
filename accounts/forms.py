@@ -17,3 +17,17 @@ class ParentRegisterForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    
+class ParentUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Parent
+        fields = [
+            'username', 'email','child_name', 'first_name', 'last_name',
+            'date_of_birth', 'parents_profession', 'country', 'state',
+            'home_phone', 'alt_phone', 'work_phone',
+            'emergency_contact', 'emergency_relation'
+        ]
+        widgets = {
+            'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
+            'previous_employers': forms.Textarea(attrs={'rows': 3}),
+        }
