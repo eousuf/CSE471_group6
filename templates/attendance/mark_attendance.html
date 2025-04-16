@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Mark Attendance{% endblock %}
+
+{% block content %}
+<h2 class="text-center">Mark Attendance for {{ today }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Child</th>
+                <th>Status</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for form in formset %}
+            <tr>
+                <td>{{ form.instance.child.name }}</td>
+                <td>{{ form.status }}</td>
+                <td>{{ form.remarks }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Submit Attendance</button>
+    </div>
+</form>
+{% endblock %}

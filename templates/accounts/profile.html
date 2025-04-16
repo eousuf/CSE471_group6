@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+{% block content %}
+<div class="edit-wrapper">
+  <div class="edit-form-container">
+    <h2>My Profile</h2>
+
+    <div class="profile-info">
+      <p><strong>Username:</strong> {{ parent.username }}</p>
+      <p><strong>Email:</strong> {{ parent.email }}</p>
+      <p><strong>Child's Name:</strong> {{ parent.child_name }}</p>
+      <p><strong>Name:</strong> {{ parent.first_name }} {{ parent.last_name }}</p>
+      <p><strong>Date of Birth:</strong> {{ parent.date_of_birth }}</p>
+      <p><strong>Profession:</strong> {{ parent.parents_profession }}</p>
+      <p><strong>Country:</strong> {{ parent.country }}</p>
+      <p><strong>State:</strong> {{ parent.state }}</p>
+      <p><strong>Home Phone:</strong> {{ parent.home_phone }}</p>
+      <p><strong>Alternate Phone:</strong> {{ parent.alt_phone }}</p>
+      <p><strong>Work Phone:</strong> {{ parent.work_phone }}</p>
+      <p><strong>Emergency Contact:</strong> {{ parent.emergency_contact }}</p>
+      <p><strong>Relation to Emergency Contact:</strong> {{ parent.emergency_relation }}</p>
+    </div>
+
+    <div class="profile-actions">
+      <a href="{% url 'edit_profile' %}" class="cta-button">Edit Profile</a>
+      <a href="{% url 'password_change' %}" class="cta-button">Change Password</a>
+      <a href="{% url 'children_register' %}">Register a New Child</a>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
