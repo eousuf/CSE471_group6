@@ -36,7 +36,19 @@
             <a href="#careers" class="card-button">View Careers</a>
         </div>
     </section>
+    <h2>Available Daycares</h2>
+        <ul>
+        {% for daycare in daycare_list %}
+            <li>
+                <strong>{{ daycare.name }}</strong> - {{ daycare.address }} 
+                <a href="{% url 'children_register' %}?daycare_id={{ daycare.id }}">Enroll Child</a>
+            </li>
+        {% empty %}
+            <li>No daycares available right now.</li>
+        {% endfor %}
+        </ul>
 
+    
     <!-- Video Section -->
     <section class="video-section">
         <div class="video-container">
