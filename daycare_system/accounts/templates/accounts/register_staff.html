@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Register Staff{% endblock %}
+
+{% block content %}
+<div class="edit-wrapper">
+    <div class="edit-form-container">
+        <h2>Register New Staff for {{ daycare.name }}</h2>
+        <form method="post" novalidate class="edit-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-success">Register Staff</button>
+        </form>
+        <div style="text-align: center; margin-top: 1rem;">
+            <a href="{% url 'admin_dashboard' %}">Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
