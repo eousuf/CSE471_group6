@@ -45,7 +45,11 @@
               <div class="error-message">{{ form.password2.errors }}</div>
             {% endif %}
           </div>
-
+          <div>
+            <label for="id_role">Role:</label>
+            {{ form.role }}
+          </div>
+        
           <button type="submit" class="auth-button">Register Now</button>
         </form>
         
