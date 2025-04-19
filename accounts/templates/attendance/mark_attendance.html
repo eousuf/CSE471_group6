@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mark Daily Attendance{% endblock %}
+
+{% block content %}
+  <h2>Mark Daily Attendance</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
+  <p>
+    <a href="{% url 'index' %}">&larr; Back to Home</a>
+  </p>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Attendance Report{% endblock %}
+
+{% block content %}
+  <h2>Attendance Report ({{ period|capfirst }})</h2>
+
+  {% if attendance %}
+    <table border="1" cellpadding="5" cellspacing="0" style="border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th>Child</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Marked By</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for rec in attendance %}
+          <tr>
+            <td>{{ rec.child_name }}</td>
+            <td>{{ rec.date }}</td>
+            <td>{{ rec.status|capfirst }}</td>
+            <td>{{ rec.staff.get_full_name|default:rec.staff.username }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No records found for this period.</p>
+  {% endif %}
+
+  <p>
+    <a href="{% url 'mark_attendance' %}">Mark Attendance</a> |
+    <a href="{% url 'attendance_report' 'daily' %}">Daily</a> |
+    <a href="{% url 'attendance_report' 'weekly' %}">Weekly</a> |
+    <a href="{% url 'attendance_report' 'monthly' %}">Monthly</a>
+  </p>
+  <p>
+    <a href="{% url 'index' %}">&larr; Back to Home</a>
+  </p>
+{% endblock %}
